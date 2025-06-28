@@ -35,6 +35,7 @@ const CategoryGrid: React.FC<CategoryGridProps> = ({
       {displayCategories.map((category) => (
         <Grid item xs={6} sm={4} md={3} key={category.id}>
           <Card
+            data-testid="category-card"
             sx={{
               height: '100%',
               transition: 'all 0.2s ease-in-out',

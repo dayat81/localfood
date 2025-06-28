@@ -78,6 +78,7 @@ const HomePage: React.FC = () => {
                 variant="h2"
                 component="h1"
                 gutterBottom
+                data-testid="hero-title"
                 sx={{
                   fontWeight: 700,
                   fontSize: { xs: '2.5rem', md: '3.5rem' },
@@ -89,6 +90,7 @@ const HomePage: React.FC = () => {
               </Typography>
               <Typography
                 variant="h6"
+                data-testid="hero-subtitle"
                 sx={{
                   mb: 4,
                   opacity: 0.9,
@@ -103,19 +105,21 @@ const HomePage: React.FC = () => {
                   variant="contained"
                   color="secondary"
                   size="large"
+                  data-testid="order-now-btn"
                   startIcon={<SearchIcon />}
-                  onClick={() => navigate('/search')}
+                  onClick={() => navigate('/products')}
                   sx={{
                     px: 4,
                     py: 1.5,
                     fontSize: '1.1rem',
                   }}
                 >
-                  Start Searching
+                  Order Now
                 </Button>
                 <Button
                   variant="outlined"
                   size="large"
+                  data-testid="browse-categories-btn"
                   onClick={() => navigate('/products')}
                   sx={{
                     px: 4,
@@ -129,7 +133,7 @@ const HomePage: React.FC = () => {
                     },
                   }}
                 >
-                  Browse Restaurants
+                  Browse Categories
                 </Button>
               </Box>
             </Grid>
@@ -171,7 +175,9 @@ const HomePage: React.FC = () => {
         {categoriesLoading ? (
           <LoadingSpinner message="Loading categories..." />
         ) : (
-          <CategoryGrid categories={categories} />
+          <div data-testid="category-grid">
+            <CategoryGrid categories={categories} />
+          </div>
         )}
 
         <Box sx={{ textAlign: 'center', mt: 4 }}>
@@ -186,7 +192,7 @@ const HomePage: React.FC = () => {
       </Container>
 
       {/* Features Section */}
-      <Box sx={{ bgcolor: 'background.default', py: 8 }}>
+      <Box sx={{ bgcolor: 'background.default', py: 8 }} data-testid="features-section">
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 6 }}>
             <Typography variant="h3" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
@@ -201,6 +207,7 @@ const HomePage: React.FC = () => {
             {features.map((feature, index) => (
               <Grid item xs={12} sm={6} md={3} key={index}>
                 <Card
+                  data-testid="feature-card"
                   sx={{
                     height: '100%',
                     textAlign: 'center',
@@ -236,6 +243,7 @@ const HomePage: React.FC = () => {
 
       {/* CTA Section */}
       <Box
+        data-testid="final-cta"
         sx={{
           bgcolor: 'secondary.main',
           color: 'white',

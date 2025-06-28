@@ -54,6 +54,7 @@ const Header: React.FC = () => {
         <Button
           key={item.path}
           color="inherit"
+          data-testid={`nav-${item.label.toLowerCase()}`}
           onClick={() => handleNavigation(item.path)}
           sx={{
             mx: 1,
@@ -90,6 +91,7 @@ const Header: React.FC = () => {
             <IconButton
               edge="start"
               color="inherit"
+              data-testid="mobile-menu-btn"
               onClick={() => dispatch(toggleSidebar())}
               sx={{ mr: 2 }}
             >
@@ -101,6 +103,7 @@ const Header: React.FC = () => {
           <Typography
             variant="h6"
             component="div"
+            data-testid="logo"
             onClick={() => navigate('/')}
             sx={{
               flexGrow: isMobile ? 1 : 0,
@@ -114,7 +117,7 @@ const Header: React.FC = () => {
 
           {/* Desktop navigation */}
           {!isMobile && (
-            <Box sx={{ flexGrow: 1, display: 'flex' }}>
+            <Box sx={{ flexGrow: 1, display: 'flex' }} data-testid="navigation-menu">
               {renderNavigationItems()}
             </Box>
           )}
@@ -124,11 +127,11 @@ const Header: React.FC = () => {
             {/* Location indicator */}
             {currentLocation && (
               <Box
+                data-testid="location-indicator"
                 sx={{
-                  display: 'flex',
+                  display: { xs: 'none', sm: 'flex' },
                   alignItems: 'center',
                   mr: 1,
-                  display: { xs: 'none', sm: 'flex' },
                 }}
               >
                 <LocationIcon sx={{ fontSize: 16, mr: 0.5 }} />
@@ -141,6 +144,7 @@ const Header: React.FC = () => {
             {/* Search button */}
             <IconButton
               color="inherit"
+              data-testid="search-button"
               onClick={() => navigate('/search')}
               title="Search"
             >
@@ -150,6 +154,7 @@ const Header: React.FC = () => {
             {/* Cart button */}
             <IconButton
               color="inherit"
+              data-testid="cart-button"
               onClick={() => navigate('/cart')}
               title="Shopping Cart"
             >
@@ -164,6 +169,7 @@ const Header: React.FC = () => {
         anchor="left"
         open={sidebarOpen}
         onClose={() => dispatch(toggleSidebar())}
+        data-testid="mobile-drawer"
         sx={{
           display: { xs: 'block', md: 'none' },
         }}
