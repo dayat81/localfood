@@ -1,0 +1,24 @@
+{
+  "name": "localfood",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test_saleor_auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dayat81/localfood.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dayat81/localfood/issues"
+  },
+  "homepage": "https://github.com/dayat81/localfood#readme",
+  "dependencies": {
+    "axios": "^1.10.0"
+  }
+}
