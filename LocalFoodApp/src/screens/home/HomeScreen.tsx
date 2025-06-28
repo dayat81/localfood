@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,7 +8,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootStackParamList } from '../../types';
+import { AppDispatch, RootState } from '../../store';
+import { fetchCategories } from '../../store/slices/productSlice';
+import CategoryList from '../../components/categories/CategoryList';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -17,6 +21,13 @@ interface Props {
 }
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { categories } = useSelector((state: RootState) => state.products);
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -26,6 +37,28 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             Discover amazing local restaurants and order your favorite meals
           </Text>
         </View>
+
+        <View style={styles.categorySection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Browse Categories</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('ProductList', {})}>
+              <Text style={styles.seeAllText}>See All</Text>
+            </TouchableOpacity>
+          </View>
+          <CategoryList 
+            categories={categories.slice(0, 6)}
+            horizontal={true}
+            showProductCount={false}
+          />
+        </View>
+
+        <TouchableOpacity
+          style={styles.searchButton}
+          onPress={() => navigation.navigate('Search', {})}
+        >
+          <Text style={styles.searchIcon}>🔍</Text>
+          <Text style={styles.searchButtonText}>Search for food, restaurants...</Text>
+        </TouchableOpacity>
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -86,6 +119,50 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 20,
+  },
+  categorySection: {
+    marginBottom: 30,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#333333',
+  },
+  seeAllText: {
+    fontSize: 16,
+    color: '#007AFF',
+    fontWeight: '500',
+  },
+  searchButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 24,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  searchIcon: {
+    fontSize: 20,
+    marginRight: 12,
+  },
+  searchButtonText: {
+    flex: 1,
+    fontSize: 16,
+    color: '#999999',
   },
   header: {
     alignItems: 'center',

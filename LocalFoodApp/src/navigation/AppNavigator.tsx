@@ -13,6 +13,8 @@ import CartScreen from '../screens/cart/CartScreen';
 import CheckoutScreen from '../screens/cart/CheckoutScreen';
 import OrdersScreen from '../screens/orders/OrdersScreen';
 import ProfileScreen from '../screens/auth/ProfileScreen';
+import CategoryScreen from '../screens/category/CategoryScreen';
+import SearchScreen from '../screens/search/SearchScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -55,6 +57,16 @@ const AppNavigator: React.FC = () => {
           name="ProductDetail"
           component={ProductDetailScreen}
           options={{ title: 'Product Details' }}
+        />
+        <Stack.Screen
+          name="Category"
+          component={CategoryScreen}
+          options={{ title: 'Category' }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={SearchScreen}
+          options={{ title: 'Search', headerShown: false }}
         />
         <Stack.Screen
           name="Cart"

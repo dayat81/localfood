@@ -237,6 +237,8 @@ export type RootStackParamList = {
   Register: undefined;
   ProductList: { categoryId?: string };
   ProductDetail: { productId: string };
+  Category: { categoryId: string; categoryName: string };
+  Search: { initialQuery?: string };
   Cart: undefined;
   Checkout: undefined;
   Orders: undefined;
