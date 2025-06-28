@@ -24,9 +24,30 @@ export interface Address {
 export interface Product {
   id: string;
   name: string;
+  slug: string;
   description?: string;
+  seoDescription?: string;
+  seoTitle?: string;
+  isAvailableForPurchase?: boolean;
+  availableForPurchase?: string;
   thumbnail?: {
     url: string;
+    alt?: string;
+  };
+  images?: Array<{
+    id: string;
+    url: string;
+    alt?: string;
+  }>;
+  category?: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+  productType?: {
+    id: string;
+    name: string;
+    hasVariants?: boolean;
   };
   pricing?: {
     priceRange: {
@@ -35,28 +56,97 @@ export interface Product {
           amount: number;
           currency: string;
         };
+        net: {
+          amount: number;
+          currency: string;
+        };
+      };
+      stop: {
+        gross: {
+          amount: number;
+          currency: string;
+        };
+        net: {
+          amount: number;
+          currency: string;
+        };
       };
     };
-  };
-  category?: {
-    id: string;
-    name: string;
-  };
-}
-
-export interface ProductVariant {
-  id: string;
-  name: string;
-  sku?: string;
-  pricing?: {
-    price?: {
+    onSale?: boolean;
+    discount?: {
       gross: {
         amount: number;
         currency: string;
       };
     };
   };
-  product: Product;
+  variants?: ProductVariant[];
+  attributes?: Array<{
+    attribute: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+    values: Array<{
+      id: string;
+      name: string;
+      slug: string;
+      value?: string;
+    }>;
+  }>;
+  rating?: number;
+  weight?: {
+    unit: string;
+    value: number;
+  };
+  metadata?: Array<{
+    key: string;
+    value: string;
+  }>;
+}
+
+export interface ProductVariant {
+  id: string;
+  name: string;
+  sku?: string;
+  quantityAvailable?: number;
+  pricing?: {
+    price?: {
+      gross: {
+        amount: number;
+        currency: string;
+      };
+      net: {
+        amount: number;
+        currency: string;
+      };
+    };
+    onSale?: boolean;
+    discount?: {
+      gross: {
+        amount: number;
+        currency: string;
+      };
+    };
+  };
+  attributes?: Array<{
+    attribute: {
+      id: string;
+      name: string;
+      slug: string;
+    };
+    values: Array<{
+      id: string;
+      name: string;
+      slug: string;
+      value?: string;
+    }>;
+  }>;
+  weight?: {
+    unit: string;
+    value: number;
+  };
+  product?: Product;
 }
 
 // Cart types
@@ -186,4 +276,19 @@ export interface Category {
   id: string;
   name: string;
   slug: string;
+  description?: string;
+  seoDescription?: string;
+  seoTitle?: string;
+  backgroundImage?: {
+    url: string;
+    alt?: string;
+  };
+  level?: number;
+  parent?: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+  children?: Category[];
+  productCount?: number;
 }
